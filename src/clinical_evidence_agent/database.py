@@ -751,4 +751,100 @@ def get_patient_lab_units(con, patient_id: str, code: str):
     ).fetchdf()
 
 
+def build_utilization_evidence(con, patient_id: str):
+    utilization_change = get_patient_utilization_change(
+        con,
+        patient_id,
+    )
 
+    comparison = compare_patient_utilization(
+        con,
+        patient_id,
+    )
+
+    def clean_date(value):
+        if value is None:
+            return None
+
+        if hasattr(value, "date"):
+            value = value.date()
+
+        return value.isoformat()
+
+    encounter_classes = []
+
+    for _, row in comparison.iterrows():
+        prior_count = int(row["prior_count"])
+        recent_count = int(row["recent_count"])
+        absolute_change = int(row["absolute_change"])
+
+        encounter_classes.append(
+            {
+                "encounter_class": row["ENCOUNTERCLASS"],
+                "prior_count": prior_count,
+                "recent_count": recent_count,
+                "absolute_change": absolute_change,
+            }
+        )
+
+    prior_total = sum(
+        item["prior_count"]
+        for item in encounter_classes
+    )
+
+    recent_total = sum(
+        item["recent_count"]
+        for item in encounter_classes
+    )
+
+    evidence_sufficiency = classify_utilization_evidence_sufficiency(
+        prior_total,
+        recent_total,
+    )
+
+    return {
+        "status": "ok",
+        "patient_id": patient_id,
+        "anchor_date": clean_date(
+            utilization_change["anchor_date"]
+        ),
+        "prior_period": {
+            "start": clean_date(
+                utilization_change["prior_period"]["start"]
+            ),
+            "end": clean_date(
+                utilization_change["prior_period"]["end"]
+            ),
+            "total_encounters": prior_total,
+        },
+        "recent_period": {
+            "start": clean_date(
+                utilization_change["recent_period"]["start"]
+            ),
+            "end": clean_date(
+                utilization_change["recent_period"]["end"]
+            ),
+            "total_encounters": recent_total,
+        },
+        "evidence_sufficiency": evidence_sufficiency,
+        "total_change": {
+            "absolute": recent_total - prior_total,
+        },
+        "by_encounter_class": encounter_classes,
+    }
+
+
+def classify_utilization_evidence_sufficiency(
+    prior_count: int,
+    recent_count: int,
+) -> str:
+    if recent_count == 0:
+        return "no_recent_utilization"
+
+    if prior_count == 0:
+        return "no_prior_utilization"
+
+    if prior_count == 1 or recent_count == 1:
+        return "sparse_comparison"
+
+    return "multi_encounter_comparison"

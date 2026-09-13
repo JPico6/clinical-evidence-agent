@@ -30,7 +30,9 @@ from clinical_evidence_agent.evidence.labs import (
     get_patient_egfr,
     get_patient_lab_conflicts,
     get_patient_lab_units,
+    get_patient_latest_numeric_observation,
     get_patient_numeric_lab_history,
+    get_patient_numeric_lab_catalog,
     get_patient_unambiguous_lab_history,
     summarize_lab_by_year,
 )

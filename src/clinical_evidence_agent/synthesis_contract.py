@@ -23,6 +23,9 @@ from clinical_evidence_agent.evidence_workflow import ClinicalEvidenceBundle
 
 EvidencePathPart: TypeAlias = str | int
 
+MAX_CURRENT_STATE_FINDINGS = 6
+MAX_TRAJECTORY_CHANGES = 5
+
 
 class EvidenceReference(BaseModel):
     """Pointer to a concrete item inside one executed evidence-tool payload."""
@@ -51,7 +54,10 @@ class CurrentStateSynthesis(BaseModel):
         ClinicalEvidenceIntent.CURRENT_STATE
     )
     overall_assessment: SynthesisFinding
-    findings: tuple[SynthesisFinding, ...] = Field(default_factory=tuple)
+    findings: tuple[SynthesisFinding, ...] = Field(
+        default_factory=tuple,
+        max_length=MAX_CURRENT_STATE_FINDINGS,
+    )
     uncertainties: tuple[SynthesisFinding, ...] = Field(default_factory=tuple)
 
 
@@ -62,7 +68,10 @@ class TrajectorySynthesis(BaseModel):
 
     intent: Literal[ClinicalEvidenceIntent.TRAJECTORY] = ClinicalEvidenceIntent.TRAJECTORY
     overall_assessment: SynthesisFinding
-    changes: tuple[SynthesisFinding, ...] = Field(default_factory=tuple)
+    changes: tuple[SynthesisFinding, ...] = Field(
+        default_factory=tuple,
+        max_length=MAX_TRAJECTORY_CHANGES,
+    )
     uncertainties: tuple[SynthesisFinding, ...] = Field(default_factory=tuple)
 
 
@@ -79,6 +88,9 @@ _SHARED_GUARDRAILS = (
     "Do not invent laboratory concepts, codes, units, or values when laboratory evidence was not retrieved.",
     "Represent missing, sparse, conflicting, or ambiguous evidence as uncertainty rather than silently resolving it.",
     "Do not provide a care plan, treatment recommendation, diagnosis, or prescribing recommendation in this synthesis stage.",
+    "Supported evidence does not automatically deserve inclusion; intentionally omit lower-priority evidence when it does not materially improve the answer.",
+    "Prioritize findings by relevance to the user question, recency, likely clinical consequence of the underlying issue, and whether the evidence materially changes the overall picture; frequency alone does not imply importance.",
+    "Numeric observations should enrich an important clinical finding when useful; do not create a separate finding merely because a numeric observation was selected or retrieved.",
 )
 
 

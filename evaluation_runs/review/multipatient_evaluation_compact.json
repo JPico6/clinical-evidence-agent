@@ -1,0 +1,800 @@
+{
+  "evaluation_run_version": "1.0",
+  "model_name": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "lookback_days": 365,
+  "source_summary": {
+    "patient_count": 10,
+    "intent_case_count": 20,
+    "successful_intent_cases": 20,
+    "failed_intent_cases": 0,
+    "deterministic_pass_count": 20,
+    "deterministic_fail_count": 0
+  },
+  "offline_review_summary": {
+    "case_count": 20,
+    "ok_case_count": 20,
+    "mean_finding_count": 4.0,
+    "min_finding_count": 2,
+    "max_finding_count": 6,
+    "mean_uncertainty_count": 2.65,
+    "mean_selected_observation_count": 6.8
+  },
+  "cases": [
+    {
+      "patient_id": "bca1691f-8839-1d66-ed01-471134d55738",
+      "cohort_label": "reference_complex",
+      "cohort_rationale": "Previously studied complex reference case retained as a regression anchor.",
+      "anchor_date": "2026-08-12",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "33914-3 [mL/min/{1.73_m2}]",
+        "2823-3 [mmol/L]",
+        "718-7 [g/dL]",
+        "4548-4 [%]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "8867-4 [/min]",
+        "39156-5 [kg/m2]"
+      ],
+      "selection_notes": [
+        "The catalog does not include an INR or prothrombin-time observation, so anticoagulation intensity for warfarin cannot be assessed from the available numeric observations.",
+        "Selections prioritize current renal, hematologic, diabetic, cardiovascular, and obesity status while avoiding redundant analytes."
+      ],
+      "overall_assessment": "The record reflects a medically complex situation dominated by newly observed atrial fibrillation in May 2026, substantial kidney disease with dialysis documented through March 2026, and longstanding records of diabetes and coronary disease; the evidence does not establish current symptom burden, medication adherence, or whether dialysis continued after March.",
+      "findings": [
+        "Atrial fibrillation was newly observed on 2026-05-04, with direct-current cardioversion documented that day. Digoxin, warfarin, and verapamil medication records also first appeared on that date and had source-open entries through 2026-08-12; this same-date grouping is descriptive rather than causal and does not prove actual medication use.",
+        "Kidney-related evidence includes a stage 4 chronic kidney disease source record, an awaiting-transplant source record, and 140 documented dialysis encounters from 2022-05-28 through 2026-03-24. The latest selected renal-function observation was 24.2 mL/min/{1.73_m2} on 2026-08-12.",
+        "Longstanding diabetes records include diabetic neuropathy and kidney complications. Insulin and metformin have recent source-open medication entries dated through 2026-08-12, but these records do not establish adherence or ingestion.",
+        "Cardiovascular history includes ischemic heart disease, coronary artery bypass grafting, and myocardial infarction records predating the newly observed atrial fibrillation.",
+        "An Alzheimer's disease source record began in July 2024, accompanied by a source-open galantamine medication record; neither establishes the patient's current cognitive or functional status.",
+        "Recent records also document recurrent social vulnerability: social isolation had a latest episode start of 2026-06-24, and limited social contact was recorded through 2026-08-05."
+      ],
+      "uncertainties": [
+        "Current dialysis status is unclear: dialysis procedures are documented only through 2026-03-24, while a later renal-function measurement exists on 2026-08-12. The supplied evidence does not clarify whether dialysis stopped, continued elsewhere, or was incompletely captured.",
+        "Post-cardioversion rhythm, atrial-fibrillation symptom burden, and treatment response are not provided; source-open medication entries cannot establish persistence or actual use.",
+        "There were 10 emergency-class encounters in the recent year versus none in the prior year, but the latest emergency encounter on 2026-08-12 documents only medication reconciliation; the utilization change alone does not establish clinical worsening or its cause."
+      ],
+      "finding_count": 6,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "bca1691f-8839-1d66-ed01-471134d55738",
+      "cohort_label": "reference_complex",
+      "cohort_rationale": "Previously studied complex reference case retained as a regression anchor.",
+      "anchor_date": "2026-08-12",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "8867-4 [/min]",
+        "8480-6 [mm[Hg]]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "2160-0 [mg/dL]",
+        "2823-3 [mmol/L]",
+        "74006-8 [kg]",
+        "718-7 [g/dL]",
+        "4548-4 [%]"
+      ],
+      "selection_notes": [
+        "No coagulation observation such as INR is available in the catalog, so anticoagulation intensity after warfarin initiation cannot be assessed from these numeric observations.",
+        "Selections prioritize the recent atrial fibrillation event and the ongoing renal, anemia, and diabetes burden while avoiding less directly relevant high-frequency measurements."
+      ],
+      "overall_assessment": "The clearest material change is a newly observed atrial fibrillation record on May 4, 2026, accompanied by cardioversion and three new medication records, adding cardiovascular complexity to a background that already includes documented ischemic heart disease and an extensive renal-dialysis history. The available evidence does not support a single improving or worsening label.",
+      "findings": [
+        "On May 4, 2026, atrial fibrillation was newly observed; direct-current cardioversion and new records for digoxin, warfarin, and verapamil were also documented on that date. This same-date grouping is descriptive and does not establish causal relationships or proven medication indications.",
+        "Kidney-related procedure burden remained substantial through March 2026: 27 renal-dialysis encounters were recorded in the recent period, with the latest on March 24, against 140 lifetime dialysis encounters beginning in 2022.",
+        "Utilization shifted toward emergency care: emergency encounters increased from 0 to 10, while ambulatory encounters declined from 49 to 38 and total encounters declined from 74 to 68. These counts alone do not establish clinical deterioration or improvement."
+      ],
+      "uncertainties": [
+        "The post-cardioversion rhythm status and clinical outcome are not provided. Digoxin, warfarin, and verapamil remain source-open medication records through August 12, but these records do not establish adherence, persistence, actual ingestion, or proven indication.",
+        "The kidney trajectory after March 24 is unclear because no later dialysis procedure is documented in this bundle. This does not establish that dialysis stopped or that transplantation occurred; the stage-4 CKD and awaiting-transplant entries are source-open provenance rather than proof of current status.",
+        "The reason for the increased emergency utilization is not established by the retrieved evidence; for example, the latest emergency encounter on August 12 contains only medication reconciliation in its procedure record."
+      ],
+      "finding_count": 3,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "ee4b7339-ca58-b6af-c199-04b6d5761c73",
+      "cohort_label": "sparse_record",
+      "cohort_rationale": "Low total record volume stresses sparse-evidence and omission behavior.",
+      "anchor_date": "2026-06-30",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "29463-7 [kg]",
+        "8302-2 [cm]",
+        "77606-2 [%]",
+        "8289-1 [%]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "8867-4 [/min]",
+        "9279-1 [/min]"
+      ],
+      "selection_notes": [
+        "Prioritized recent growth measures and core vital signs recorded through the anchor date.",
+        "CBC components and health-utility measures were not selected because the deterministic evidence does not identify a condition or event making them central to the current-state summary."
+      ],
+      "overall_assessment": "The available 1-year record is sparse: it shows two wellness encounters, one source-open record of \u201cmedication review due,\u201d and no retrieved medication courses or procedures. Current active diagnoses and medication use are therefore not established by this evidence.",
+      "findings": [
+        "A \u201cmedication review due (situation)\u201d episode was first recorded on 2026-05-27 and remains source-open in the source data; this is documentation provenance and does not by itself establish an active clinical condition.",
+        "The latest measurements on 2026-06-30 included weight 3.9 kg, height 56.6 cm, blood-pressure components 102 and 90 mm[Hg], pulse 82/min, and respiratory rate 15/min."
+      ],
+      "uncertainties": [
+        "No medication records were retrieved, so the patient\u2019s actual medication regimen, use, adherence, and the context of the medication-review record cannot be determined.",
+        "Each selected numeric measure has only two observations in the recent year and no prior-period data, so a longitudinal clinical trajectory cannot be established."
+      ],
+      "finding_count": 2,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "ee4b7339-ca58-b6af-c199-04b6d5761c73",
+      "cohort_label": "sparse_record",
+      "cohort_rationale": "Low total record volume stresses sparse-evidence and omission behavior.",
+      "anchor_date": "2026-06-30",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 5,
+      "selected_observations": [
+        "8302-2 [cm]",
+        "29463-7 [kg]",
+        "77606-2 [%]",
+        "8289-1 [%]",
+        "72514-3 [{score}]"
+      ],
+      "selection_notes": [
+        "Prioritized observations with measurements at two recent dates because they can directly support a trajectory assessment.",
+        "Single-date blood-count and quality-of-life observations were not selected because they cannot independently establish change over time.",
+        "Routine vital signs were not selected because the deterministic evidence identifies wellness utilization and a medication-review-due status without a specific cardiopulmonary concern."
+      ],
+      "overall_assessment": "The available record is sparse and does not establish a clear improving or worsening clinical trajectory. The main recent development is a newly recorded, source-open \u201cmedication review due\u201d situation on 2026-05-27, alongside two wellness encounters during the recent year but no retrieved medication courses or procedures.",
+      "findings": [
+        "A \u201cmedication review due\u201d situation was newly observed on 2026-05-27 and remains source-open in the supplied data; this is a documented review status, not evidence of an active condition or completed review.",
+        "Healthcare utilization consisted of two wellness encounters in 2025-07-01 through 2026-06-30, compared with no encounters in the prior period; because prior utilization is absent, this is a descriptive increase rather than evidence of clinical improvement or worsening."
+      ],
+      "uncertainties": [
+        "The medication-review entry does not establish that any medication is currently prescribed, taken, or requires a specific intervention; no medication records or courses were retrieved.",
+        "All five selected numeric observations lack prior-period data, so longitudinal change cannot be determined from them despite recent measurements."
+      ],
+      "finding_count": 2,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "57efda89-b582-bb08-8a2d-e06b2c184bfc",
+      "cohort_label": "dense_record",
+      "cohort_rationale": "High total record volume stresses salience and resistance to exhaustive inventory.",
+      "anchor_date": "2026-08-12",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "33914-3 [mL/min/{1.73_m2}]",
+        "2823-3 [mmol/L]",
+        "2028-9 [mmol/L]",
+        "74006-8 [kg]",
+        "4548-4 [%]",
+        "39156-5 [kg/m2]",
+        "8480-6 [mm[Hg]]",
+        "1751-7 [g/dL]"
+      ],
+      "selection_notes": [
+        "Hemoglobin was not selected despite the anemia diagnosis and recent epoetin use because the catalog shows no measurement within the supplied 365-day lookback, limiting its value for current-state characterization.",
+        "Kidney and dialysis observations were prioritized because ongoing renal dialysis is the most prominent recent clinical activity."
+      ],
+      "overall_assessment": "As of 2026-08-12, the evidence is dominated by ongoing renal dialysis, accompanied by recent insulin-related and repeated epoetin alfa medication records; the underlying kidney, diabetes, anemia, and transplant-status records are largely historical or source-open and therefore do not independently establish their exact current clinical status.",
+      "findings": [
+        "Renal dialysis is clearly ongoing: 382 encounters are recorded since 2021, including 66 in the last year and a dialysis encounter on the anchor date, 2026-08-12.",
+        "The record contains longstanding source-open kidney-related entries, including diabetic kidney disorder, sequential CKD stages through stage 4, proteinuria, and an awaiting-kidney-transplant situation recorded in 2021.",
+        "A longstanding source-open type 2 diabetes record is accompanied by a mixed insulin medication course with 79 source rows and latest source activity on 2026-07-29; this establishes recent medication documentation, not adherence or actual use.",
+        "Anemia-related evidence includes a historical source-open anemia entry and extensive epoetin alfa medication-course documentation, with 65 subsequent courses in the last year and the latest dated 2026-07-12; the medication records do not prove administration or current anemia severity.",
+        "Recent oral-health care was substantial: on 2026-08-05 the patient underwent gingival examination and cleaning, a dental surgical procedure, gingivectomy or gingivoplasty, postoperative care, fluoride treatment, and oral-health education in an encounter linked by source records to gingivitis or gingival disease."
+      ],
+      "uncertainties": [
+        "The exact current kidney stage and transplant candidacy or wait-list status cannot be determined: CKD stage 4 and awaiting-transplant entries are source-open records from 2021, while the directly current evidence establishes dialysis but not updated staging or transplant status.",
+        "Current medication-taking behavior remains unknown because medication entries\u2014including insulin and epoetin alfa\u2014do not establish persistence, adherence, or actual ingestion or administration, and their source reasons are not proven indications.",
+        "Weight classification is ambiguous: a source-open obesity finding began on 2025-12-24, but the latest numeric observation for code 39156-5 was 28.7 kg/m2 on 2026-07-22; these records alone do not establish whether obesity remains clinically current or has resolved."
+      ],
+      "finding_count": 5,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "57efda89-b582-bb08-8a2d-e06b2c184bfc",
+      "cohort_label": "dense_record",
+      "cohort_rationale": "High total record volume stresses salience and resistance to exhaustive inventory.",
+      "anchor_date": "2026-08-12",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "33914-3 [mL/min/{1.73_m2}]",
+        "2160-0 [mg/dL]",
+        "3094-0 [mg/dL]",
+        "2823-3 [mmol/L]",
+        "74006-8 [kg]",
+        "1751-7 [g/dL]",
+        "4548-4 [%]",
+        "39156-5 [kg/m2]"
+      ],
+      "selection_notes": [
+        "Prioritized renal and dialysis-related measures because ongoing renal dialysis is the dominant recent clinical pattern.",
+        "Included glycemic and BMI measures because diabetes is active and obesity was newly observed during the lookback period.",
+        "Did not select hemoglobin because the catalog shows no measurements in the recent period, limiting its value for explaining recent anemia trajectory."
+      ],
+      "overall_assessment": "The record shows continuing high-intensity renal care through 2026-08-12 rather than resolution of the renal problem. During the past year, a new obesity finding and a recent dental surgical episode were also recorded, but the evidence does not support a single overall improving or worsening label.",
+      "findings": [
+        "Kidney disease documentation progressed historically from stage 1 in 2011 to stage 2 in 2018, stage 3 in 2019, and stage 4 in 2021. Renal dialysis began in 2021 and continued through the anchor date, with 66 dialysis encounters in the recent year and the latest on 2026-08-12.",
+        "A BMI 30+ obesity finding was newly recorded on 2025-12-24, adding a new metabolic issue during the lookback year.",
+        "Epoetin alfa medication records continued during the recent year, with 65 subsequent courses and the latest recorded course on 2026-07-12. The record links these courses to anemia as a source reason, but this does not prove indication or administration.",
+        "Dental activity became more intensive recently: a dental referral was recorded on 2026-07-22, followed descriptively by gingival surgery/gingivoplasty, postoperative care, and other dental treatment on 2026-08-05."
+      ],
+      "uncertainties": [
+        "The current CKD stage cannot be resolved from condition status alone because stage 1 through stage 4 entries are all source-open; source-open status is provenance and does not establish that all stages are currently active. Ongoing dialysis is independently documented.",
+        "Transplant status remains unresolved: an 'awaiting kidney transplantation' entry is source-open from 2021, but the only transplant-surgeon referral in the supplied evidence also dates to 2021, with no recent transplant outcome documented.",
+        "Selected numeric observations are mixed and do not independently establish clinical improvement or worsening: code 33914-3 had a modestly higher recent median, code 2160-0 had an unchanged median, and code 3094-0 had a higher recent median.",
+        "The obesity condition entry is not fully aligned with the selected BMI series: the finding specifies BMI 30+, while the latest recorded BMI was 28.7 kg/m2 and the recent-period median was 29.75 kg/m2. The bundle does not resolve this discrepancy."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 4,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "3314e296-2326-2826-271d-a7be5b896db9",
+      "cohort_label": "low_recent_activity",
+      "cohort_rationale": "Low recent record volume stresses uncertainty when little current evidence exists.",
+      "anchor_date": "2026-05-26",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 3,
+      "selected_observations": [
+        "QOLS [{score}]",
+        "QALY [a]",
+        "DALY [a]"
+      ],
+      "selection_notes": [
+        "Other cataloged observations were not selected because their latest measurements predate the one-year current-state window or are substantially older than the anchor date.",
+        "No values or clinical interpretations are inferred from observation availability."
+      ],
+      "overall_assessment": "The year ending 2026-05-26 contains sparse documented clinical activity: one outpatient encounter, no newly observed conditions or procedures, and one newly observed source-open norethindrone medication record. This limited documentation does not establish absence of illness.",
+      "findings": [
+        "A Jolivette norethindrone 0.35 mg pack was newly recorded on 2026-01-06 as a source-open course without a known stop date. The record does not establish indication, adherence, persistence, or actual ingestion.",
+        "No recent procedure encounters were documented, and utilization consisted of one outpatient encounter versus 14 total encounters in the prior comparison year; this change alone does not demonstrate clinical improvement or worsening.",
+        "The most recent documented significant injury was a forearm fracture beginning 2025-02-18 and recorded as stopped on 2025-04-08, with bone immobilization on 2025-02-17. Associated ibuprofen and acetaminophen/hydrocodone courses also have recorded 2025 end dates."
+      ],
+      "uncertainties": [
+        "The current status of older source-open records for obesity, stress, drug misuse, environmental violence, and intimate partner abuse cannot be determined. Their lack of a recorded stop is source provenance and does not prove that these issues remain clinically active.",
+        "Current clinical assessment is constrained by sparse recent encounters and the absence of newly observed condition or procedure evidence in the supplied one-year lookback."
+      ],
+      "finding_count": 3,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "3314e296-2326-2826-271d-a7be5b896db9",
+      "cohort_label": "low_recent_activity",
+      "cohort_rationale": "Low recent record volume stresses uncertainty when little current evidence exists.",
+      "anchor_date": "2026-05-26",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 1,
+      "selected_observations": [
+        "QOLS [{score}]"
+      ],
+      "selection_notes": [
+        "No recent vital signs, laboratory results, symptom scores, or anthropometric measurements are available in the catalog within the supplied 365-day lookback.",
+        "DALY and QALY were not selected because they are less direct and potentially redundant summary measures for explaining the patient's recent clinical change."
+      ],
+      "overall_assessment": "The recent record is sparse: during the year ending 2026-05-26, one encounter and one newly observed medication were recorded, with no newly observed conditions or procedures. This limits assessment of the clinical trajectory and does not establish improvement or worsening.",
+      "findings": [
+        "Recorded utilization decreased from 14 encounters in the prior year to 1 in the recent year; ambulatory encounters changed from 10 to 0 and emergency encounters from 2 to 0. This utilization change alone does not indicate a change in health status.",
+        "The only newly observed medication was a Jolivette norethindrone pack starting 2026-01-06; an Errin norethindrone pack has a recorded end on the same date. This is a descriptive product-record transition, not evidence of actual use or a causal medication switch.",
+        "No new condition or procedure was observed in the recent year. The most recent documented acute condition was the forearm fracture beginning 2025-02-18 with a recorded stop on 2025-04-08, before the current lookback period."
+      ],
+      "uncertainties": [
+        "The source-open Jolivette medication record has no recorded end, but source-open status does not establish that it remains clinically active, was taken, or was continued.",
+        "The QOLS score was 1.0 in both the prior and recent periods, but each period contains only one measurement and the evidence is classified as a single-point comparison; therefore, it provides insufficient evidence of a meaningful quality-of-life trajectory."
+      ],
+      "finding_count": 3,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "5693c080-f485-91e7-54b9-ad9a8c12af62",
+      "cohort_label": "high_recent_activity",
+      "cohort_rationale": "High recent record volume stresses prioritization among many recent facts.",
+      "anchor_date": "2026-08-16",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "4548-4 [%]",
+        "2160-0 [mg/dL]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "5804-0 [mg/dL]",
+        "39156-5 [kg/m2]",
+        "18262-6 [mg/dL]"
+      ],
+      "selection_notes": [
+        "Selected a focused set covering blood pressure, glycemic status, kidney function and proteinuria, obesity, and cardiovascular lipid risk.",
+        "Observation values are not provided in the catalog and must be retrieved before drawing conclusions about the patient's current state."
+      ],
+      "overall_assessment": "As of 2026-08-16, the record reflects substantial chronic cardiometabolic and renal burden, prior coronary artery bypass grafting, an obesity-range BMI, and markedly frequent recent emergency encounters. Important current-status uncertainty remains because several conditions and medications are only source-open records rather than confirmation of active disease or actual medication use.",
+      "findings": [
+        "There is documented ischemic heart disease history with coronary angiography in September 2023 and coronary artery bypass grafting on 2023-11-20. No new cardiovascular procedure was identified in the current 365-day lookback.",
+        "Healthcare utilization is high: 53 encounters occurred during the recent year, including 48 emergency encounters versus 13 in the prior comparison year. The latest emergency encounter on 2026-08-16 documented health/social-needs assessment and medication reconciliation, without a specific acute clinical problem captured in the supplied procedure evidence.",
+        "The record contains source-open entries for obesity, hypertension, prediabetes, and metabolic syndrome. Latest measurements on 2026-08-16 were blood pressure 130/94 mmHg and BMI 33.1 kg/m2; these measurements do not by themselves establish the current status or control of the source-recorded conditions.",
+        "Renal evidence is clinically important but internally ambiguous: source-open records include chronic kidney disease stages 1, 2, and 3 plus diabetes-associated albuminuria/proteinuria. On 2026-08-16, creatinine was 2.0 mg/dL and observation code 33914-3 was 48.0 mL/min/1.73 m2; recent and prior medians for that observation were similar at 45.2 and 45.7, respectively.",
+        "Sleep disorder and sleep apnea appear as source-open records, with continued sleep-apnea assessment activity: 24 encounters in the recent year and the latest assessment on 2026-08-09. The evidence does not establish current symptoms or use of positive-airway-pressure therapy.",
+        "Recent psychosocial and safety-related episodes were recorded but had closed stop dates: intimate-partner abuse from 2026-05-11 through 2026-05-25, stress through 2026-08-03, and social isolation through 2026-08-03. Domestic-abuse screening was documented as recently as 2026-06-21, but current safety or psychosocial status is not established."
+      ],
+      "uncertainties": [
+        "Source-open medication records include insulin and hydrochlorothiazide updated on 2026-08-16 and older source-open records for clopidogrel, simvastatin, nitroglycerin, and metoprolol. These records do not prove current prescribing intent, indication, persistence, adherence, or ingestion.",
+        "The simultaneous source-open CKD stage 1, stage 2, and stage 3 entries conflict, so a current CKD stage cannot be resolved from this bundle alone.",
+        "Despite frequent emergency utilization, the supplied evidence does not identify a specific acute event driving the pattern or establish clinical improvement or worsening from utilization counts alone."
+      ],
+      "finding_count": 6,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "5693c080-f485-91e7-54b9-ad9a8c12af62",
+      "cohort_label": "high_recent_activity",
+      "cohort_rationale": "High recent record volume stresses prioritization among many recent facts.",
+      "anchor_date": "2026-08-16",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "2160-0 [mg/dL]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "55758-7 [{score}]",
+        "70274-6 [{score}]",
+        "76504-0 [{score}]"
+      ],
+      "selection_notes": [
+        "These observations were selected for longitudinal retrieval; their catalog presence and measurement frequency do not establish any result or trend.",
+        "The set focuses on renal, metabolic, cardiovascular, and psychosocial domains that could materially contextualize the marked increase in emergency encounters."
+      ],
+      "overall_assessment": "Over the past year, recorded healthcare utilization rose markedly, driven by emergency-class encounters, but the bundle identifies no newly observed condition, medication, or procedure and no recent event candidates. This supports a trajectory of substantially increased healthcare contact without enough evidence to determine whether the patient's underlying clinical status improved or worsened.",
+      "findings": [
+        "Emergency-class encounters increased from 13 in the prior year to 48 in the recent year, while urgent-care and wellness counts were unchanged. The latest documented emergency encounter on 2026-08-16 contained health/social-needs assessment and medication reconciliation rather than a newly documented acute diagnosis or intervention.",
+        "Recent psychosocial documentation includes an intimate-partner-abuse episode from 2026-05-11 through 2026-05-25, followed by documented stress through 2026-08-03 and social isolation from 2026-07-20 through 2026-08-03. These are time-limited source episodes and do not establish that any issue remains ongoing after its recorded stop date.",
+        "Monitoring and screening remained prominent: during the recent year there were 24 sleep-apnea assessment encounters, 19 depression-screening encounters, 9 anxiety assessments, and 9 domestic-abuse screenings. Their frequency documents repeated assessment but does not itself demonstrate greater symptom severity or clinical deterioration.",
+        "The major cardiovascular event remains historical rather than newly observed: ischemic heart disease was first recorded in 2023, followed by coronary artery bypass grafting on 2023-11-20; no newly observed procedure was identified in the recent year."
+      ],
+      "uncertainties": [
+        "The reason for the sharp rise in emergency-class encounters is not established. Recent encounters frequently contain reconciliation, screening, and assessment procedures, while the event-retrieval tool found no qualifying recent event candidates; exact clinical complaints and outcomes are unavailable.",
+        "Source-open medication records for insulin and hydrochlorothiazide include entries through 2026-08-16, but these records and their source reasons do not prove current indication, adherence, persistence, or actual ingestion.",
+        "Selected numeric series do not provide a clear overall direction: several recent-versus-prior medians were unchanged or only slightly different, and numeric change alone cannot establish clinical improvement or worsening."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "355a4d50-2628-aa65-c336-deacf4d606fb",
+      "cohort_label": "condition_heavy",
+      "cohort_rationale": "High condition-row volume stresses repeated-condition summarization.",
+      "anchor_date": "2026-08-06",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "14959-1 [mg/g]",
+        "18262-6 [mg/dL]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "55758-7 [{score}]",
+        "70274-6 [{score}]"
+      ],
+      "selection_notes": [
+        "Selections emphasize current diabetes control, diabetic kidney involvement, cardiovascular status, and recently assessed mental health.",
+        "No observation result or clinical interpretation is inferred from catalog presence or measurement frequency."
+      ],
+      "overall_assessment": "The record shows a medically complex history\u2014including diabetes-related, cardiovascular, neurologic, skeletal, and kidney documentation\u2014with recent dental and throat infections recorded as ended before the 2026-08-06 anchor date. Many major conditions remain source-open records, so their present clinical activity is not established by this bundle.",
+      "findings": [
+        "Type 2 diabetes is source-open from 2009, with source-open records of nonproliferative diabetic retinopathy and stage 1 chronic kidney disease/kidney disorder due to diabetes. A premixed insulin course is also source-open with a latest source start of 2026-08-06, and a diabetic retinal eye examination was performed on 2026-02-06.",
+        "The cardiovascular history is consequential: myocardial infarction is documented from 2004, ischemic heart disease from 2016, and an emergency coronary artery bypass graft was performed on 2016-12-25. These are historical/source-open records rather than evidence of a new cardiovascular event in the current lookback period.",
+        "A tooth infection was recorded on 2026-06-25 and stopped on 2026-06-26; same-date dental care included extraction, postoperative care, and restoration. Subsequent dental consultation, plaque/calculus removal, gingival examination, and oral-health education occurred on 2026-07-23. Streptococcal sore throat was separately recorded from 2026-07-02 through 2026-07-16.",
+        "Social vulnerability remains documented through source-open records of social isolation and limited social contact. The latest 2026-08-06 urgent-care encounter consisted of health/social-needs, medication, anxiety, fall-risk, and depression assessments; the bundle does not provide their clinical results."
+      ],
+      "uncertainties": [
+        "Source-open conditions and medications cannot be assumed clinically active or currently taken. In particular, the medication records do not establish the indication, adherence, persistence, or actual ingestion of insulin or the longstanding source-open cardiovascular medications.",
+        "Interpretation of numeric observation code 33914-3 is limited because its latest 2026-08-06 measurement is ambiguous, with two reported values (73.0 and 92.1 mL/min/{1.73_m2}); the evidence does not resolve which value applies."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "355a4d50-2628-aa65-c336-deacf4d606fb",
+      "cohort_label": "condition_heavy",
+      "cohort_rationale": "High condition-row volume stresses repeated-condition summarization.",
+      "anchor_date": "2026-08-06",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "14959-1 [mg/g]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "18262-6 [mg/dL]",
+        "55758-7 [{score}]",
+        "70274-6 [{score}]"
+      ],
+      "selection_notes": [
+        "Selected longitudinal measures spanning the most clinically relevant chronic domains: diabetes, kidney function, cardiovascular risk, and behavioral health.",
+        "The single recent temperature measurement was not selected because it cannot establish a numeric trajectory by itself.",
+        "Observation presence and measurement counts were used only to confirm availability, not to infer any result or trend."
+      ],
+      "overall_assessment": "The recent trajectory is mixed rather than uniformly improving or worsening: two newly observed acute problems occurred in June\u2013July 2026, with the dental infection prompting procedural care, while longstanding diabetes-related and cardiovascular disease remain recorded. The available utilization and numeric data do not establish a clear overall clinical direction.",
+      "findings": [
+        "A tooth infection was newly recorded on 2026-06-25, with same-day dental surgery, simple extraction, postoperative care, and restoration for caries. Subsequent dental consultation, plaque/calculus removal, gingival examination, and oral-health education occurred on 2026-07-23, documenting continued dental follow-up after the acute event.",
+        "Streptococcal sore throat was newly recorded on 2026-07-02, with the source episode stopping on 2026-07-16. No corresponding medication or procedure course was retrieved, so the clinical course beyond the episode dates is not shown.",
+        "Longstanding diabetes-related burden continues to be represented by source-open records for type 2 diabetes, nonproliferative diabetic retinopathy, stage 1 chronic kidney disease, and diabetic kidney disorder. A diabetic retinal eye examination with retinal imaging occurred on 2026-02-06, and the insulin source record was updated through 2026-08-06; these records document ongoing monitoring and medication provenance, not disease control or medication use.",
+        "Documented healthcare encounters declined from 24 in the prior year to 17 in the recent year, mainly reflecting fewer outpatient encounters (6 to 1) and urgent-care encounters (10 to 8), while ambulatory and emergency counts were unchanged. This utilization change alone does not show clinical improvement or worsening."
+      ],
+      "uncertainties": [
+        "The supplied numeric observations lack clinical concept descriptions, limiting interpretation. One observation (code 4548-4) was unchanged at a median of 4.0% across both periods, whereas other codes changed in different directions; these values cannot support a unified clinical trend from this bundle alone.",
+        "The latest value for numeric observation code 33914-3 is explicitly ambiguous, with two values (73.0 and 92.1) on 2026-08-06, further limiting assessment of change.",
+        "Source-open conditions and medications indicate record provenance only; they do not prove that conditions are currently active or that medications were taken, continued, or effective."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "0b786670-17af-32e1-b2d2-f77c33874b30",
+      "cohort_label": "medication_heavy",
+      "cohort_rationale": "High medication-row volume stresses course semantics and source-open guardrails.",
+      "anchor_date": "2023-08-22",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "20447-9 [{copies}/mL]",
+        "24467-3 [/uL]",
+        "2160-0 [mg/dL]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "39156-5 [kg/m2]",
+        "2345-7 [mg/dL]"
+      ],
+      "selection_notes": [
+        "Prioritize the latest available result for each selected observation because the intent is current state rather than trajectory.",
+        "HIV viral load and CD4 observations extend through 2023-07-17; the other selected observations extend through 2023-02-28.",
+        "No cataloged numeric observation directly explains the July 2023 hospice admission, so none was selected for that purpose."
+      ],
+      "overall_assessment": "As of 2023-08-22, the clearest current development is a hospice encounter spanning 2023-07-25 through 2023-08-22, with documented hospice-care events through 2023-08-15. This followed a separate HIV-focused ambulatory evaluation on 2023-07-17 that included viral-load, blood-count, and CD4 procedures; the evidence does not establish a causal relationship between these events.",
+      "findings": [
+        "Hospice services were newly documented beginning 2023-07-25, accompanied by certification, initial assessment, notifications, and development of an individualized care plan; 22 hospice-care events were recorded through 2023-08-15.",
+        "The record contains a source-open AIDS condition dating from 1992 and recent HIV-focused surveillance. On 2023-07-17, selected observations were 19 {copies}/mL for code 20447-9 and 578 /uL for code 24467-3. A combination antiretroviral medication course is source-open with a latest source start of 2023-02-28.",
+        "Kidney-related source records include diabetic kidney disease, microalbuminuria, and both stage 1 and stage 2 CKD labels. The latest selected observations on 2023-02-28 were 2.0 mg/dL for code 2160-0 and 64.3 mL/min/{1.73_m2} for code 33914-3.",
+        "Hypertension is present as a long-standing source-open condition. Amlodipine and hydrochlorothiazide courses are also source-open with latest source starts on 2023-02-28; selected observations that day were 121 mm[Hg] for code 8480-6 and 73 mm[Hg] for code 8462-4.",
+        "Unemployment was newly recorded on 2023-03-01 as a source-open finding, representing a recent documented social circumstance."
+      ],
+      "uncertainties": [
+        "No source reason is supplied for the hospice procedures, and the bundle does not identify the hospice indication, terminal condition, symptom burden, or prognosis; hospice documentation therefore cannot be attributed to HIV/AIDS, kidney disease, or another condition.",
+        "Source-open condition and medication records do not by themselves establish current clinical activity, current disease stage, medication persistence, adherence, or ingestion. This is especially relevant to the historical AIDS, hypertension, and conflicting CKD stage records and to the three source-open medication courses."
+      ],
+      "finding_count": 5,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "0b786670-17af-32e1-b2d2-f77c33874b30",
+      "cohort_label": "medication_heavy",
+      "cohort_rationale": "High medication-row volume stresses course semantics and source-open guardrails.",
+      "anchor_date": "2023-08-22",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 6,
+      "selected_observations": [
+        "20447-9 [{copies}/mL]",
+        "24467-3 [/uL]",
+        "2160-0 [mg/dL]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "29463-7 [kg]",
+        "QOLS [{score}]"
+      ],
+      "selection_notes": [
+        "The catalog contains no numeric observations dated during or after the hospice admission beginning 2023-07-25, so these selections can mainly characterize the trajectory leading up to that transition.",
+        "Most general laboratory and vital-sign observations end on 2023-02-28; HIV markers and QOLS are the closest available numeric observations to the hospice event."
+      ],
+      "overall_assessment": "The clearest recent shift is from ambulatory HIV-related monitoring on July 17, 2023 to a newly documented hospice admission beginning July 25 and extending through the August 22 anchor date. This is a major change in care setting, but the evidence does not identify its clinical cause or establish worsening of a specific disease.",
+      "findings": [
+        "Hospice services were newly observed on July 25, with certification, initial assessment, an individualized care plan, notifications, and 22 hospice-care events documented through August 15 within an encounter ending August 22.",
+        "Before hospice admission, HIV-related surveillance continued: viral-load testing occurred in September 2022, February 2023, and July 2023, with CBC and absolute CD4 procedures also performed on July 17.",
+        "A social transition was documented on March 1, 2023: the prior full-time-employment episode stopped and unemployment was newly observed. Their same-date occurrence is descriptive and does not establish causation.",
+        "Recorded encounters increased from 7 in the prior year to 13 in the recent year, including ambulatory encounters rising from 2 to 5 and the first recorded hospice encounter. This utilization change alone does not establish clinical worsening."
+      ],
+      "uncertainties": [
+        "No source reason is provided for the hospice care, certification, assessment, or care-plan procedures, so the underlying indication and its relationship to the longstanding conditions cannot be determined.",
+        "Antiretroviral and antihypertensive courses were source-open with latest source records on February 28, but these records do not establish current use, adherence, persistence, or actual ingestion at the time of hospice admission.",
+        "The selected numeric observations move in mixed directions and include both multi-point and single-point comparisons; without further clinical context, they do not support an overall improving or worsening interpretation."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "2211f478-b7b4-7711-16cf-84ffb52b9d2b",
+      "cohort_label": "procedure_heavy",
+      "cohort_rationale": "High procedure-row volume stresses event grouping and repeated-procedure handling.",
+      "anchor_date": "2016-10-08",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "14959-1 [mg/g]",
+        "39156-5 [kg/m2]",
+        "2571-8 [mg/dL]",
+        "718-7 [g/dL]",
+        "72514-3 [{score}]",
+        "9279-1 [/min]"
+      ],
+      "selection_notes": [
+        "No numeric spirometry or other pulmonary-function result is available in the catalog despite recent respiratory-function procedures.",
+        "Selections prioritize the major active cardiometabolic, renal, hematologic, respiratory, nutritional, and pain-related conditions without assuming any unseen result."
+      ],
+      "overall_assessment": "As of 2016-10-08, the record reflects a complex longstanding history centered on source-open cystic fibrosis, diabetes, and stage 1 chronic kidney disease entries, with cystic-fibrosis-oriented monitoring in March 2016 and an emergency encounter involving intravenous therapy in June 2016. The evidence does not establish whether the source-open conditions remain clinically active at the anchor date.",
+      "findings": [
+        "The cystic fibrosis entry dates to 1984 and remains source-open. Recent related surveillance included sputum culture and respiratory-function measurement on 2016-03-02. Dornase alfa and pancreatin courses were also source-open, with latest source starts on 2016-02-15; these records do not prove ongoing use.",
+        "The record contains source-open entries for diabetes mellitus type 2, diabetes due to cystic fibrosis, stage 1 chronic kidney disease, and kidney disorder due to diabetes. Insulin and metformin courses were source-open with latest source starts on 2016-02-15, and a BMI-related measurement was 31.4 kg/m2 on that date; medication records do not establish actual use or indication.",
+        "On 2016-06-03, an emergency-room encounter included intravenous antibiotic therapy followed by intravenous infusion. The procedure records carry a source reason referencing a historical Staphylococcus aureus sepsis entry, but this does not establish the indication or a current sepsis diagnosis."
+      ],
+      "uncertainties": [
+        "The source-open condition and medication records cannot establish current clinical activity, medication persistence, adherence, or ingestion at the 2016-10-08 anchor date.",
+        "Results of the March sputum culture, respiratory-function testing, and blood-specimen collection are not supplied, and no clinical outcome from the June emergency encounter is provided; therefore current respiratory or infectious status cannot be determined.",
+        "Numeric observation code 33914-3 is internally ambiguous on 2016-02-15, listing values of 71.4 and 92.9 mL/min/{1.73_m2}; the bundle does not resolve which value applies."
+      ],
+      "finding_count": 3,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "2211f478-b7b4-7711-16cf-84ffb52b9d2b",
+      "cohort_label": "procedure_heavy",
+      "cohort_rationale": "High procedure-row volume stresses event grouping and repeated-procedure handling.",
+      "anchor_date": "2016-10-08",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 7,
+      "selected_observations": [
+        "4548-4 [%]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "14959-1 [mg/g]",
+        "39156-5 [kg/m2]",
+        "72514-3 [{score}]",
+        "70274-6 [{score}]",
+        "55758-7 [{score}]"
+      ],
+      "selection_notes": [
+        "No numeric pulmonary-function result is available in the catalog despite recent respiratory-function testing for cystic fibrosis.",
+        "Selected observations have repeated recent measurements and address the principal chronic disease and symptom domains; single-point summary measures were not selected because they cannot establish trajectory.",
+        "The latest selected measurements are dated no later than 2016-02-15, so they would not directly characterize the June 2016 emergency encounter."
+      ],
+      "overall_assessment": "Over the year ending 2016-10-08, the record shows no newly observed conditions, medications, or procedures. Established chronic disease monitoring continued, followed by an emergency encounter with IV therapy in June 2016; together with reduced overall utilization and mixed numeric observations, this does not establish a single improving or worsening clinical trajectory.",
+      "findings": [
+        "Cystic-fibrosis-associated surveillance was documented in December 2015 and March 2016, with sputum culture, respiratory-function measurement, and blood-specimen collection at both encounters.",
+        "A June 2016 emergency encounter included intravenous antibiotic therapy and infusion, representing the most recent and potentially consequential acute-care event in the supplied record. The attached Staphylococcus aureus sepsis source reason is provenance and does not prove the encounter diagnosis.",
+        "Total encounters decreased from 24 in the prior year to 9 in the recent year, driven mainly by ambulatory encounters decreasing from 19 to 3; outpatient encounters increased from 1 to 3 and wellness encounters from 1 to 2. This utilization shift alone does not demonstrate clinical improvement or worsening.",
+        "Kidney-relevant numeric evidence is not directionally consistent: observation 33914-3 had a lower recent median than prior median (82.15 versus 97.45), but its latest value is ambiguous (71.4 or 92.9); observation 14959-1 also had a lower recent median (7.0 versus 9.45) while its latest value was 13.6. These data do not support a clear renal trajectory."
+      ],
+      "uncertainties": [
+        "Clinical evidence is sparse late in the lookback period: the latest retrieved numeric measurements and medication source starts are from February 2016, the latest chronic respiratory-monitoring encounter is from March, and the latest procedure encounter is the June emergency visit.",
+        "Source-open medication records\u2014including insulin, metformin, pancreatin, dornase alfa, acetaminophen, and norethindrone\u2014do not establish current use, adherence, persistence, or actual ingestion.",
+        "The bundle supplies numeric observation codes but not their clinical concept descriptions, and one latest measurement is explicitly ambiguous; therefore their clinical meaning and direction cannot be resolved beyond the reported values."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "7af6b271-f16d-21e1-882a-7bff71005a7b",
+      "cohort_label": "numeric_rich",
+      "cohort_rationale": "Broad numeric-observation coverage stresses constrained observation selection.",
+      "anchor_date": "2026-04-28",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "14959-1 [mg/g]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "18262-6 [mg/dL]",
+        "718-7 [g/dL]",
+        "39156-5 [kg/m2]"
+      ],
+      "selection_notes": [
+        "Selections prioritize observations with recent measurements dated 2026-04-14 that directly inform the patient's active cardiometabolic disease, renal risk, anemia, and obesity.",
+        "No observation result or clinical interpretation is inferred from catalog presence."
+      ],
+      "overall_assessment": "The record reflects a substantial historical/source-open cardiometabolic burden, including type 2 diabetes with documented neuropathy and retinopathy, hypertension, obesity, and ischemic heart disease with coronary artery bypass grafting in 2023. A hospice episode occurred from November 2025 through January 2026, followed by wellness and dental encounters in April 2026; the evidence does not establish why hospice was initiated or the present clinical activity of the source-open conditions.",
+      "findings": [
+        "Cardiovascular history includes an ischemic heart disease record beginning in March 2023 and documented coronary artery bypass grafting on June 6, 2023.",
+        "Type 2 diabetes is recorded with neuropathy and nonproliferative diabetic retinopathy. A diabetic retinal eye examination and associated ophthalmic testing were documented most recently on October 23, 2025.",
+        "Metformin extended release 500 mg and lisinopril 10 mg have source-open medication records updated on April 14, 2026; these records do not establish actual use or adherence.",
+        "The patient had a documented hospice encounter from November 11, 2025 through January 14, 2026, with repeated hospice-care events through January 13 and a discharge procedure on January 14.",
+        "Recent outpatient activity included a wellness encounter on April 14, 2026 with medication reconciliation, health/social assessment, anxiety assessment, fall assessment, depression screening, and substance-use screening, followed by dental consultation, imaging, gingival examination, plaque/calculus removal, and oral-health education on April 28.",
+        "Selected measurements dated April 14, 2026 included code 4548-4 at 5.9%, codes 8480-6 and 8462-4 at 112/77 mmHg, and code 39156-5 at 29.5 kg/m\u00b2; no clinical trajectory is established from these values alone."
+      ],
+      "uncertainties": [
+        "No indication, precipitating diagnosis, goals-of-care context, or clinical outcome is supplied for the hospice episode, so its significance to the current state cannot be determined.",
+        "The listed chronic conditions and several medications are source-open records rather than proof that they remain clinically active or are currently being taken.",
+        "Most selected numeric comparisons rely on only one recent and one prior measurement, limiting any inference about improvement, worsening, or sustained control."
+      ],
+      "finding_count": 6,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "7af6b271-f16d-21e1-882a-7bff71005a7b",
+      "cohort_label": "numeric_rich",
+      "cohort_rationale": "Broad numeric-observation coverage stresses constrained observation selection.",
+      "anchor_date": "2026-04-28",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 8,
+      "selected_observations": [
+        "4548-4 [%]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "33914-3 [mL/min/{1.73_m2}]",
+        "718-7 [g/dL]",
+        "29463-7 [kg]",
+        "59460-6 [{#}]",
+        "70274-6 [{score}]"
+      ],
+      "selection_notes": [
+        "Prioritize dated serial values for trajectory interpretation rather than assuming direction from measurement frequency.",
+        "The Morse Fall Scale has only one cataloged measurement, so it can add recent-state context but cannot independently establish a trend."
+      ],
+      "overall_assessment": "The most consequential recent change is a time-limited hospice episode from November 2025 through January 2026, followed by discharge and later wellness and ambulatory care in April 2026. This sequence reflects a major change in care setting, but the evidence does not establish the reason for hospice or whether the subsequent transition represents clinical improvement.",
+      "findings": [
+        "Hospice admission began on 2025-11-11, with 64 hospice-care events documented through 2026-01-13 and a patient-discharge procedure on 2026-01-14.",
+        "By April 2026, documented care had shifted to a wellness encounter with health/social-needs assessment, medication reconciliation, mental-health and substance-use screening, and fall-risk assessment, followed by ambulatory dental care on 2026-04-28.",
+        "No conditions or medications were newly observed during the 365-day lookback, so the available evidence does not identify a new recorded diagnosis or medication addition accompanying these care-setting changes.",
+        "Diabetes-related eye surveillance continued, with a seven-procedure ophthalmic evaluation including a diabetic retinal eye exam and retinal optical coherence tomography on 2025-10-23; these examinations have been documented across 12 encounters since 2016."
+      ],
+      "uncertainties": [
+        "The bundle provides no source reason for the hospice-care procedure, and discharge from hospice cannot by itself establish recovery, improvement, or the patient\u2019s subsequent prognosis.",
+        "Recent numeric comparisons are based on only one measurement in each period\u2014or have no prior measurement\u2014so they are insufficient to establish sustained physiologic improvement or worsening.",
+        "Metformin and lisinopril have recent source-open records dated 2026-04-14, but these records do not establish adherence, persistence, or actual ingestion."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 3,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "716c6d0a-2a5d-0aaa-9ced-312ed6a943da",
+      "cohort_label": "recent_condition_activity",
+      "cohort_rationale": "Many recently starting condition records stress current-state and trajectory salience.",
+      "anchor_date": "2015-02-04",
+      "intent": "current_state",
+      "status": "ok",
+      "selected_observation_count": 5,
+      "selected_observations": [
+        "32693-4 [mmol/L]",
+        "8478-0 [mm[Hg]]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "2708-6 [%]"
+      ],
+      "selection_notes": [
+        "Selections prioritize observations dated near the 2015-02-03 to 2015-02-04 critical illness involving sepsis, septic shock, and acute respiratory distress syndrome.",
+        "Older routine laboratory and screening observations were not selected because they would add less to the acute current-state description."
+      ],
+      "overall_assessment": "As of 2015-02-04, the record depicts an acute critical-care episode beginning 2015-02-03, with newly recorded sepsis, septic shock, and acute respiratory distress syndrome, alongside an emergency encounter involving intensive care, intravenous fluid resuscitation, and mechanical ventilation.",
+      "findings": [
+        "Sepsis and septic shock were first recorded on 2015-02-03; acute respiratory distress syndrome was first recorded on 2015-02-04.",
+        "The emergency encounter is recorded as spanning 2015-02-03 through 2015-02-08 and includes ICU admission, two intravenous-fluid resuscitation events, artificial ventilation, and a mechanically assisted ventilation weaning procedure recorded through 2015-02-07.",
+        "Medication records document one-day courses on 2015-02-03 for vancomycin, piperacillin/tazobactam, and norepinephrine; their recorded source reasons reference sepsis or septic shock, but these records do not establish actual administration or indication.",
+        "Historical source-open records also include essential hypertension and hyperlipidemia, with source-open amlodipine, lisinopril, and simvastatin courses last sourced in August\u2013September 2014; source-open status does not establish that these conditions or medications remain clinically active at the anchor date."
+      ],
+      "uncertainties": [
+        "The supplied sepsis and septic-shock records do not specify an infectious source.",
+        "The record does not establish the acute episode's outcome by 2015-02-04; the presence of a weaning procedure must not be interpreted as successful liberation from ventilation or clinical recovery."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    },
+    {
+      "patient_id": "716c6d0a-2a5d-0aaa-9ced-312ed6a943da",
+      "cohort_label": "recent_condition_activity",
+      "cohort_rationale": "Many recently starting condition records stress current-state and trajectory salience.",
+      "anchor_date": "2015-02-04",
+      "intent": "trajectory",
+      "status": "ok",
+      "selected_observation_count": 5,
+      "selected_observations": [
+        "32693-4 [mmol/L]",
+        "8480-6 [mm[Hg]]",
+        "8462-4 [mm[Hg]]",
+        "8478-0 [mm[Hg]]",
+        "2708-6 [%]"
+      ],
+      "selection_notes": [
+        "Prioritized observations measured on 2015-02-03 that directly relate to the abrupt septic shock and respiratory failure course.",
+        "Lactate and blood pressures have the strongest potential to demonstrate short-term change; the single mean pressure and oxygen saturation measurements provide acute severity context rather than a trend.",
+        "Excluded older routine laboratory and chronic-risk measurements because they predate the February 2015 deterioration and are less likely to clarify the immediate trajectory."
+      ],
+      "overall_assessment": "The trajectory has shifted sharply from predominantly ambulatory chronic and preventive care to a newly documented critical illness: sepsis and septic shock appeared on 2015-02-03, followed by acute respiratory distress syndrome on 2015-02-04, with emergency resuscitation, intensive-care admission, and ventilatory support documented.",
+      "findings": [
+        "The most consequential new change is the onset of sepsis with septic shock on 2015-02-03 and acute respiratory distress syndrome on 2015-02-04; all three were newly observed within the past year.",
+        "The acute episode was accompanied by a major escalation in care intensity: intravenous-fluid resuscitation, ICU admission, artificial ventilation, and a mechanical-ventilation weaning procedure were recorded in the emergency encounter beginning 2015-02-03.",
+        "New one-day medication records on 2015-02-03 included vancomycin, piperacillin/tazobactam, and norepinephrine; their source-reason associations were sepsis or septic shock, but the records alone do not prove administration or response.",
+        "Earlier in the year, a colon polyp was newly recorded on 2014-06-24 alongside colonoscopy and rectal polypectomy, representing a significant new gastrointestinal event before the February critical illness."
+      ],
+      "uncertainties": [
+        "The subsequent clinical outcome is not established. A ventilation-weaning procedure is recorded, but the acute respiratory distress syndrome episode has no recorded stop date; neither item by itself demonstrates recovery or resolution.",
+        "The current status of longstanding hypertension and hyperlipidemia therapy is uncertain: amlodipine, lisinopril, and simvastatin are source-open medication courses, but these records do not establish continued prescribing, adherence, or ingestion."
+      ],
+      "finding_count": 4,
+      "uncertainty_count": 2,
+      "deterministic_passed": true,
+      "deterministic_checks_passed": 5,
+      "deterministic_checks_total": 5
+    }
+  ]
+}

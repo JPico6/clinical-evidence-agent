@@ -1,0 +1,374 @@
+{
+  "human_rubric_version": "1.0",
+  "source_evaluation_run_version": "1.0",
+  "model_name": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "score_range": {
+    "min": 1,
+    "max": 5
+  },
+  "rubric": [
+    {
+      "id": "grounding_inference_discipline",
+      "name": "Grounding / inference discipline",
+      "question": "Are substantive claims supported by the supplied evidence without turning source-open records, medication records, source reasons, numeric changes, or exact-date grouping into stronger clinical claims?",
+      "score_1": "Material unsupported inference or guardrail violation.",
+      "score_3": "Mostly grounded, with one meaningful overstatement or ambiguous inference.",
+      "score_5": "Claims remain carefully bounded by the evidence and its provenance semantics."
+    },
+    {
+      "id": "major_issue_completeness",
+      "name": "Major-issue completeness",
+      "question": "Does the synthesis capture the major evidence-supported issues or changes needed to answer the intent, without requiring exhaustive coverage?",
+      "score_1": "Misses one or more central issues, substantially distorting the overall picture.",
+      "score_3": "Captures the main picture but omits a meaningful issue or change.",
+      "score_5": "Captures the major issues needed for the task; omissions are reasonably peripheral."
+    },
+    {
+      "id": "salience_materiality",
+      "name": "Salience / materiality",
+      "question": "Are included findings materially useful for the task, with peripheral, frequency-driven, or weak numeric filler omitted?",
+      "score_1": "Answer is dominated by peripheral/inventory-like content or misses obvious prioritization.",
+      "score_3": "Generally prioritized, but includes one or more questionable lower-value findings.",
+      "score_5": "Concise, strongly prioritized, and avoids filler even when more evidence is available."
+    },
+    {
+      "id": "uncertainty_calibration",
+      "name": "Uncertainty calibration",
+      "question": "Does the synthesis preserve important missing, sparse, conflicting, ambiguous, or documentation-limited evidence without becoming evasive?",
+      "score_1": "Important uncertainty is ignored/resolved without support, or uncertainty overwhelms useful conclusions.",
+      "score_3": "Most uncertainty is handled appropriately, with some under- or over-emphasis.",
+      "score_5": "Important uncertainty is explicit, proportionate, and tied to the evidence limitation."
+    },
+    {
+      "id": "temporal_reasoning",
+      "name": "Temporal reasoning",
+      "question": "Does the answer correctly distinguish historical, recent, latest, repeated, and changing evidence relative to the patient's own anchor date?",
+      "score_1": "Material temporal confusion changes the meaning of the record.",
+      "score_3": "Overall chronology is sound but one temporal distinction is weak or unclear.",
+      "score_5": "Temporal statements are accurate, patient-relative, and appropriately qualified."
+    }
+  ],
+  "cases": [
+    {
+      "patient_id": "bca1691f-8839-1d66-ed01-471134d55738",
+      "cohort_label": "reference_complex",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "bca1691f-8839-1d66-ed01-471134d55738",
+      "cohort_label": "reference_complex",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "ee4b7339-ca58-b6af-c199-04b6d5761c73",
+      "cohort_label": "sparse_record",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "ee4b7339-ca58-b6af-c199-04b6d5761c73",
+      "cohort_label": "sparse_record",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "57efda89-b582-bb08-8a2d-e06b2c184bfc",
+      "cohort_label": "dense_record",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "57efda89-b582-bb08-8a2d-e06b2c184bfc",
+      "cohort_label": "dense_record",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "3314e296-2326-2826-271d-a7be5b896db9",
+      "cohort_label": "low_recent_activity",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "3314e296-2326-2826-271d-a7be5b896db9",
+      "cohort_label": "low_recent_activity",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "5693c080-f485-91e7-54b9-ad9a8c12af62",
+      "cohort_label": "high_recent_activity",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "5693c080-f485-91e7-54b9-ad9a8c12af62",
+      "cohort_label": "high_recent_activity",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "355a4d50-2628-aa65-c336-deacf4d606fb",
+      "cohort_label": "condition_heavy",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "355a4d50-2628-aa65-c336-deacf4d606fb",
+      "cohort_label": "condition_heavy",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "0b786670-17af-32e1-b2d2-f77c33874b30",
+      "cohort_label": "medication_heavy",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "0b786670-17af-32e1-b2d2-f77c33874b30",
+      "cohort_label": "medication_heavy",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "2211f478-b7b4-7711-16cf-84ffb52b9d2b",
+      "cohort_label": "procedure_heavy",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "2211f478-b7b4-7711-16cf-84ffb52b9d2b",
+      "cohort_label": "procedure_heavy",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "7af6b271-f16d-21e1-882a-7bff71005a7b",
+      "cohort_label": "numeric_rich",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "7af6b271-f16d-21e1-882a-7bff71005a7b",
+      "cohort_label": "numeric_rich",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "716c6d0a-2a5d-0aaa-9ced-312ed6a943da",
+      "cohort_label": "recent_condition_activity",
+      "intent": "current_state",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    },
+    {
+      "patient_id": "716c6d0a-2a5d-0aaa-9ced-312ed6a943da",
+      "cohort_label": "recent_condition_activity",
+      "intent": "trajectory",
+      "status": "ok",
+      "scores": {
+        "grounding_inference_discipline": null,
+        "major_issue_completeness": null,
+        "salience_materiality": null,
+        "uncertainty_calibration": null,
+        "temporal_reasoning": null
+      },
+      "reviewer_notes": "",
+      "critical_failure": false,
+      "critical_failure_reason": ""
+    }
+  ]
+}

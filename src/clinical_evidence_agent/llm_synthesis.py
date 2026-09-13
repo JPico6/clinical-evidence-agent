@@ -20,6 +20,8 @@ from clinical_evidence_agent.evidence_routing import ClinicalEvidenceIntent
 from clinical_evidence_agent.evidence_workflow import ClinicalEvidenceBundle
 from clinical_evidence_agent.synthesis_contract import (
     ClinicalSynthesis,
+    MAX_CURRENT_STATE_FINDINGS,
+    MAX_TRAJECTORY_CHANGES,
     CurrentStateSynthesis,
     TrajectorySynthesis,
     get_synthesis_guardrails,
@@ -30,11 +32,14 @@ from clinical_evidence_agent.synthesis_contract import (
 _SYNTHESIS_TASKS = {
     ClinicalEvidenceIntent.CURRENT_STATE: (
         "Describe the patient's current medical situation using only the supplied deterministic evidence. "
-        "Prioritize the most clinically meaningful evidence-supported findings and explicitly preserve important uncertainty."
+        f"Return at most {MAX_CURRENT_STATE_FINDINGS} prioritized findings beyond the overall assessment. "
+        "Omit lower-priority supported details rather than inventorying the record. Explicitly preserve important uncertainty."
     ),
     ClinicalEvidenceIntent.TRAJECTORY: (
         "Explain how the patient's medical situation is changing using only the supplied deterministic evidence. "
-        "Prioritize evidence-supported changes over time and explicitly preserve important uncertainty."
+        f"Return at most {MAX_TRAJECTORY_CHANGES} prioritized changes beyond the overall assessment. "
+        "Include only changes that materially affect understanding of the patient's trajectory; fewer changes are preferable to peripheral filler. "
+        "Omit lower-priority supported changes rather than inventorying every measurable difference. Explicitly preserve important uncertainty."
     ),
 }
 
@@ -61,11 +66,22 @@ def build_synthesis_messages(
             "Return only the requested structured output.",
             "Guardrails:",
             *(f"- {guardrail}" for guardrail in guardrails),
+            "Salience rules:",
+            "- The goal is a concise prioritized synthesis, not an exhaustive evidence inventory.",
+            "- It is desirable to omit true but lower-priority evidence when it does not materially change the answer.",
+            "- Prefer evidence that is directly relevant to the task, recent, consequential, or changes the overall clinical picture.",
+            "- Frequency of documentation alone does not make a finding important.",
+            "- Use selected numeric observations to enrich important findings; do not give them their own finding solely because they were retrieved.",
+            "- Apply a materiality threshold: include a finding only if it materially helps answer the user's question.",
+            "- Omit supported details whose removal would not meaningfully change the reader's understanding of the patient's overall current situation or trajectory.",
+            "- Returning fewer findings is preferable to filling available slots with peripheral events.",
+            "- Do not replace an omitted peripheral event with a weak numeric change merely to use the available finding capacity.",
             "Evidence-reference rules:",
             "- Each evidence reference must use a tool_name present in evidence_by_tool.",
             "- Each evidence-reference path is a JSON path represented as an array of object keys and zero-based array indexes.",
             "- Cite the narrowest concrete evidence item that supports the statement when practical.",
             "- Do not cite routing_notes, conditional_tools, patient_id, intent, or lookback_days as clinical evidence.",
+            "- Numeric-observation selector rationales and selection notes are retrieval metadata, not clinical evidence; cite only the deterministic numeric-observation evidence payload.",
         ]
     )
 

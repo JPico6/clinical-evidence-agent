@@ -287,6 +287,69 @@ def compare_lab_recent_vs_prior(
         "summary": summary,
     }
 
+
+def get_patient_latest_numeric_observation(
+    con,
+    patient_id: str,
+    code: str,
+    unit: str,
+):
+    """Return the latest grounded numeric observation for an exact code/unit.
+
+    Work at calendar-date precision, matching the existing evidence-window
+    semantics and avoiding timezone-bearing timestamp conversion at the
+    DuckDB/Python boundary. If multiple distinct numeric values occur on the
+    latest date, preserve that ambiguity instead of selecting one arbitrarily.
+    """
+    latest_date_row = con.execute(
+        """
+        SELECT MAX(CAST(DATE AS DATE)) AS latest_date
+        FROM observations
+        WHERE PATIENT = ?
+          AND CODE = ?
+          AND UNITS = ?
+          AND TYPE = 'numeric'
+          AND TRY_CAST(VALUE AS DOUBLE) IS NOT NULL
+        """,
+        [patient_id, code, unit],
+    ).fetchone()
+
+    latest_date = latest_date_row[0] if latest_date_row else None
+    if latest_date is None:
+        return None
+
+    values = con.execute(
+        """
+        SELECT DISTINCT TRY_CAST(VALUE AS DOUBLE) AS value
+        FROM observations
+        WHERE PATIENT = ?
+          AND CODE = ?
+          AND UNITS = ?
+          AND TYPE = 'numeric'
+          AND TRY_CAST(VALUE AS DOUBLE) IS NOT NULL
+          AND CAST(DATE AS DATE) = ?
+        ORDER BY value
+        """,
+        [patient_id, code, unit, latest_date],
+    ).fetchdf()
+
+    distinct_values = [float(value) for value in values["value"].tolist()]
+
+    if len(distinct_values) == 1:
+        return {
+            "date": latest_date,
+            "value": distinct_values[0],
+            "ambiguous": False,
+        }
+
+    return {
+        "date": latest_date,
+        "value": None,
+        "ambiguous": True,
+        "values": distinct_values,
+    }
+
+
 def build_lab_evidence(
     con,
     patient_id: str,
@@ -341,6 +404,13 @@ def build_lab_evidence(
                 for _, row in units.iterrows()
             ],
         }
+
+    latest_measurement = get_patient_latest_numeric_observation(
+        con,
+        patient_id,
+        code,
+        result["unit"],
+    )
 
     summary = result["summary"]
 
@@ -398,6 +468,28 @@ def build_lab_evidence(
         "code": code,
         "unit": result["unit"],
         "anchor_date": result["anchor_date"].isoformat(),
+        "latest_measurement": (
+            {
+                "date": clean_date(latest_measurement["date"]),
+                "value": clean_float(latest_measurement["value"]),
+                "ambiguous": False,
+            }
+            if latest_measurement is not None
+            and not latest_measurement["ambiguous"]
+            else (
+                {
+                    "date": clean_date(latest_measurement["date"]),
+                    "value": None,
+                    "ambiguous": True,
+                    "values": [
+                        clean_float(value)
+                        for value in latest_measurement["values"]
+                    ],
+                }
+                if latest_measurement is not None
+                else None
+            )
+        ),
         "evidence_sufficiency": result["evidence_sufficiency"],
         "prior_period": {
             "start": result["prior_period"]["start"].isoformat(),
@@ -450,3 +542,155 @@ def get_patient_lab_units(con, patient_id: str, code: str):
         """,
         [patient_id, code],
     ).fetchdf()
+
+
+def get_patient_numeric_lab_catalog(con, patient_id: str):
+    """Return retrieval-safe metadata for numeric observations observed for a patient.
+
+    Observation identity is code-based. Source description variants are preserved
+    as metadata rather than treated as separate selectable concepts.
+
+    The catalog deliberately contains no clinical relevance ranking and no
+    observation values. A later selector can choose only from code/unit pairs
+    that are demonstrably present in the patient's source data.
+    """
+    anchor_date = get_patient_latest_date(con, patient_id)
+    if anchor_date is None:
+        return {
+            "status": "no_data",
+            "patient_id": patient_id,
+            "anchor_date": None,
+            "observation_count": 0,
+            "labs": [],
+        }
+
+    recent_start = anchor_date - timedelta(days=364)
+
+    rows = con.execute(
+        """
+        SELECT
+            CODE,
+            DESCRIPTION,
+            UNITS,
+            COUNT(*) AS measurement_count,
+            SUM(
+                CASE
+                    WHEN CAST(DATE AS DATE) >= ?
+                     AND CAST(DATE AS DATE) <= ?
+                    THEN 1 ELSE 0
+                END
+            ) AS recent_measurement_count,
+            MIN(CAST(DATE AS DATE)) AS first_date,
+            MAX(CAST(DATE AS DATE)) AS last_date
+        FROM observations
+        WHERE PATIENT = ?
+          AND TYPE = 'numeric'
+          AND TRY_CAST(VALUE AS DOUBLE) IS NOT NULL
+        GROUP BY CODE, DESCRIPTION, UNITS
+        ORDER BY CODE, DESCRIPTION, UNITS
+        """,
+        [recent_start, anchor_date, patient_id],
+    ).fetchdf()
+
+    grouped = {}
+    for _, row in rows.iterrows():
+        code = str(row["CODE"])
+        item = grouped.setdefault(
+            code,
+            {
+                "code": code,
+                "description": None,
+                "source_descriptions": [],
+                "measurement_count": 0,
+                "recent_measurement_count": 0,
+                "first_date": None,
+                "last_date": None,
+                "available_units": {},
+            },
+        )
+
+        description = str(row["DESCRIPTION"])
+        if description not in item["source_descriptions"]:
+            item["source_descriptions"].append(description)
+
+        count = int(row["measurement_count"])
+        recent_count = int(row["recent_measurement_count"])
+        first_date = row["first_date"]
+        last_date = row["last_date"]
+
+        item["measurement_count"] += count
+        item["recent_measurement_count"] += recent_count
+        item["first_date"] = (
+            first_date
+            if item["first_date"] is None or first_date < item["first_date"]
+            else item["first_date"]
+        )
+        item["last_date"] = (
+            last_date
+            if item["last_date"] is None or last_date > item["last_date"]
+            else item["last_date"]
+        )
+
+        unit = None if row["UNITS"] is None else str(row["UNITS"])
+        unit_item = item["available_units"].setdefault(
+            unit,
+            {
+                "unit": unit,
+                "measurement_count": 0,
+                "recent_measurement_count": 0,
+                "first_date": None,
+                "last_date": None,
+            },
+        )
+        unit_item["measurement_count"] += count
+        unit_item["recent_measurement_count"] += recent_count
+        unit_item["first_date"] = (
+            first_date
+            if unit_item["first_date"] is None or first_date < unit_item["first_date"]
+            else unit_item["first_date"]
+        )
+        unit_item["last_date"] = (
+            last_date
+            if unit_item["last_date"] is None or last_date > unit_item["last_date"]
+            else unit_item["last_date"]
+        )
+
+    catalog_observations = []
+    for item in grouped.values():
+        item["source_descriptions"].sort()
+        # Choose a deterministic display description; retrieval identity remains code.
+        item["description"] = item["source_descriptions"][0]
+        item["first_date"] = item["first_date"].isoformat()
+        item["last_date"] = item["last_date"].isoformat()
+
+        units = []
+        for unit_item in item["available_units"].values():
+            unit_item["first_date"] = unit_item["first_date"].isoformat()
+            unit_item["last_date"] = unit_item["last_date"].isoformat()
+            units.append(unit_item)
+        units.sort(key=lambda value: "" if value["unit"] is None else value["unit"])
+        item["available_units"] = units
+        item["multiple_units"] = len(units) > 1
+        catalog_observations.append(item)
+
+    catalog_observations.sort(
+        key=lambda item: (
+            -item["recent_measurement_count"],
+            -item["measurement_count"],
+            item["description"],
+            item["code"],
+        )
+    )
+
+    return {
+        "status": "ok" if catalog_observations else "no_numeric_observations",
+        "patient_id": patient_id,
+        "anchor_date": anchor_date.isoformat(),
+        "lookback_days": 365,
+        "observation_count": len(catalog_observations),
+        # Keep the established key for backward compatibility with the diagnostic
+        # and any local exploratory use.
+        "lab_count": len(catalog_observations),
+        "labs": catalog_observations,
+    }
+

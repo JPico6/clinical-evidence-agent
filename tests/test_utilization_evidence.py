@@ -97,3 +97,13 @@ def test_utilization_evidence_sparse_comparison():
     ]
 
     con.close()
+
+
+from clinical_evidence_agent.database import (
+    get_connection,
+    register_synthea_tables,
+    build_condition_evidence,
+)
+
+
+

@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from time import perf_counter
 from typing import Any, MutableMapping
 
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 from clinical_evidence_agent import database
@@ -14,7 +15,7 @@ from clinical_evidence_agent.evidence_routing import ClinicalEvidenceIntent, DEF
 from clinical_evidence_agent.evidence_tools import EvidenceToolset
 from clinical_evidence_agent.evidence_workflow import build_clinical_evidence_workflow
 from clinical_evidence_agent.shipping_pipeline import ShippingSynthesisResult, run_shipping_synthesis
-from dotenv import load_dotenv
+
 
 load_dotenv()
 

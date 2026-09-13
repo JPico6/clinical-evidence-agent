@@ -1,35 +1,29 @@
-# Python-generated files
-__pycache__/
-*.py[cod]
-build/
-dist/
-wheels/
-*.egg-info/
-
-# Virtual environments
-.venv/
-
-# Environment variables / secrets
+# Secrets
 .env
 .env.*
 !.env.example
+.streamlit/secrets.toml
 
-# IDE
+# Python / tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.tmp/
+
+# Editors / OS
 .idea/
 .vscode/
-
-# Temporary files
-.tmp/
-*.tmp
-
-# Test / tool caches
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# OS files
 .DS_Store
-Thumbs.db
 
-# Local data
-data/
+# Local full Synthea export. The small curated public demo is safe to commit.
+data/synthea/
+!data/public_demo/
+!data/public_demo/*.csv
+
+# Raw paid-evaluation payloads are retained locally but not needed in the
+# public portfolio repository. Keep the compact review artifacts instead.
+evaluation_runs/multipatient_evaluation.json
+evaluation_runs/multipatient_smoke.json

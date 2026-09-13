@@ -1,12 +1,13 @@
 """DuckDB connection, Synthea registration, raw retrieval, and shared patient dating."""
 
+import os
 from pathlib import Path
 
 import duckdb
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DATA_DIR = PROJECT_ROOT / "data" / "synthea"
+DATA_DIR = Path(os.getenv("CLINICAL_EVIDENCE_DATA_DIR", PROJECT_ROOT / "data" / "synthea")).resolve()
 
 
 def get_connection():

@@ -1,0 +1,8 @@
+streamlit
+duckdb
+pandas
+pydantic
+python-dotenv
+langchain-core
+langchain-openai
+langgraph
